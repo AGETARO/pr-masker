@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pr-masker.vercel.app/sitemap.xml
