@@ -101,6 +101,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -138,6 +139,16 @@
           </svg>
           <span>クラウド保存ゼロ（完全ローカル安心設計）</span>
         </div>
+        <button id="btnShareSite" class="btn-ghost" title="このツールを広報仲間やSNSにシェア">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          <span>仲間に教える</span>
+        </button>
         <button id="btnOpenFeedback" class="btn-ghost" title="試験運用へのフィードバック">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -219,7 +230,37 @@
 
   <!-- Main App Workspace -->
   <main class="main-container">
-    
+
+    <!-- Use Cases Showcase for Growth & Higher Conversion -->
+    <section class="usecases-section" style="margin-bottom: 24px;">
+      <div style="text-align: center; margin-bottom: 16px;">
+        <span style="font-size: 0.82rem; font-weight: 700; color: #2563eb; background: #eff6ff; padding: 4px 12px; border-radius: 20px; border: 1px solid #bfdbfe;">💡 活用シーン</span>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-heading); margin-top: 6px;">こんな場面の「顔出しNG・SNS発信」に選ばれています</h3>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px;">
+        <div style="background: white; border: 1.5px solid var(--border-card, #e2e8f0); border-radius: 12px; padding: 16px; text-align: left; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+          <div style="font-size: 1.6rem; margin-bottom: 6px;">🏢</div>
+          <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">企業広報・オウンドメディア</strong>
+          <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0; line-height: 1.5;">オフィス風景や打ち合わせの様子を社員のプライバシーに配慮して発信。</p>
+        </div>
+        <div style="background: white; border: 1.5px solid var(--border-card, #e2e8f0); border-radius: 12px; padding: 16px; text-align: left; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+          <div style="font-size: 1.6rem; margin-bottom: 6px;">🎪</div>
+          <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">イベント・セミナー・交流会</strong>
+          <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0; line-height: 1.5;">会場の大盛況感を伝えつつ、参加者の顔出しNG要望にも1秒で即応。</p>
+        </div>
+        <div style="background: white; border: 1.5px solid var(--border-card, #e2e8f0); border-radius: 12px; padding: 16px; text-align: left; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+          <div style="font-size: 1.6rem; margin-bottom: 6px;">🏫</div>
+          <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">学校・保育園・地域PTA</strong>
+          <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0; line-height: 1.5;">行事写真の保護者やお子様の顔をスタンプで可愛く隠して活動報告。</p>
+        </div>
+        <div style="background: white; border: 1.5px solid var(--border-card, #e2e8f0); border-radius: 12px; padding: 16px; text-align: left; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+          <div style="font-size: 1.6rem; margin-bottom: 6px;">☕</div>
+          <strong style="color: var(--text-heading); font-size: 0.92rem; display: block; margin-bottom: 4px;">店舗・カフェ・飲食・採用</strong>
+          <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 0; line-height: 1.5;">店内の賑わいや職場の温かいカルチャーをアピールして集客＆採用強化。</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Upload Dropzone (Visible when no image is loaded) -->
     <section id="uploadSection" class="upload-section">
       <div id="dropzone" class="dropzone-box">
@@ -722,6 +763,63 @@
       </div>
     </div>
   </footer>
+
+  <!-- Modal: Share Tool to Friends/SNS -->
+  <div id="shareModal" class="modal-backdrop hidden">
+    <div class="modal-box glass-modal" style="max-width: 480px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          <h3>広報仲間に教える・シェアする</h3>
+        </div>
+        <button id="btnCloseShare" class="btn-close-modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-desc">
+          「写真の顔モザイク」と「SNS向け100文字PR文」が一瞬で作れる無料ツールです。<br>
+          ぜひ職場の同僚、広報担当の仲間、SNS運用チームにシェアして教えてあげてください！
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 18px;">
+          <!-- X Share Button -->
+          <button id="btnShareXApp" class="btn-x-share" style="width: 100%; justify-content: center; padding: 12px; font-size: 0.95rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>𝕏 (旧Twitter) でポストして教える</span>
+          </button>
+
+          <!-- LINE Share Button -->
+          <button id="btnShareLineApp" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: #06c755; color: white; border: none; padding: 12px; border-radius: var(--radius-md, 8px); font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.019 9.572.391.084.922.258 1.057.592.12.301.079.771.038 1.085l-.164 1.021c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975 1.769-1.944 2.565-3.921 2.565-5.94"/>
+            </svg>
+            <span>LINE で友達・グループに教える</span>
+          </button>
+
+          <!-- Copy Link Button -->
+          <button id="btnCopyAppUrl" class="btn-secondary" style="width: 100%; justify-content: center; padding: 12px; font-size: 0.95rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span>サイトのURLをコピーする</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="justify-content: flex-end;">
+        <button id="btnCloseShare2" class="btn-ghost">閉じる</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal: Feedback (Beta Testing) -->
   <div id="feedbackModal" class="modal-backdrop hidden">

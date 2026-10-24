@@ -118,6 +118,15 @@ const elements = {
   feedbackText: document.getElementById('feedbackText'),
   starBtns: document.querySelectorAll('.star-btn'),
 
+  // Share Site Modal
+  btnShareSite: document.getElementById('btnShareSite'),
+  shareModal: document.getElementById('shareModal'),
+  btnCloseShare: document.getElementById('btnCloseShare'),
+  btnCloseShare2: document.getElementById('btnCloseShare2'),
+  btnShareXApp: document.getElementById('btnShareXApp'),
+  btnShareLineApp: document.getElementById('btnShareLineApp'),
+  btnCopyAppUrl: document.getElementById('btnCopyAppUrl'),
+
   toastContainer: document.getElementById('toastContainer')
 };
 
@@ -910,6 +919,10 @@ elements.btnDownloadAll.addEventListener('click', async () => {
       setTimeout(() => {
         showToast('画像保存 ＆ 広報文面コピーが完了しました！', 'success');
       }, 500);
+      setTimeout(() => {
+        // Viral growth: gentle prompt to share
+        showToast('🎉 お役に立てましたら、ぜひヘッダーの「仲間に教える」からシェアしてください！', 'info');
+      }, 3000);
     } catch (e) {}
   }
 });
@@ -1028,14 +1041,74 @@ elements.btnSubmitFeedback.addEventListener('click', () => {
   showToast('ご意見・フィードバックを送信しました。誠にありがとうございます！', 'success');
 });
 
-// Close feedback modal when clicking backdrop
-if (elements.feedbackModal) {
-  elements.feedbackModal.addEventListener('click', (e) => {
-    if (e.target === elements.feedbackModal) {
-      elements.feedbackModal.classList.add('hidden');
+// ==========================================
+// Share Modal Logic (Viral Growth)
+// ==========================================
+function openShareModal() {
+  if (elements.shareModal) {
+    elements.shareModal.classList.remove('hidden');
+  }
+}
+
+function closeShareModal() {
+  if (elements.shareModal) {
+    elements.shareModal.classList.add('hidden');
+  }
+}
+
+if (elements.btnShareSite) {
+  elements.btnShareSite.addEventListener('click', openShareModal);
+}
+if (elements.btnCloseShare) {
+  elements.btnCloseShare.addEventListener('click', closeShareModal);
+}
+if (elements.btnCloseShare2) {
+  elements.btnCloseShare2.addEventListener('click', closeShareModal);
+}
+
+// Share to X (Twitter)
+if (elements.btnShareXApp) {
+  elements.btnShareXApp.addEventListener('click', () => {
+    const text = '写真の顔モザイクと100字広報文を一瞬で自動生成できるWebツール「かおモザ・PR MAKER」使ってみた！完全無料でブラウザ完結だから機密写真も安心。広報・SNS担当者におすすめ👇';
+    const url = window.location.origin || 'https://pr-masker.vercel.app';
+    const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=広報,SNS運用,PRMasker,顔モザイク`;
+    window.open(xUrl, '_blank', 'noopener,noreferrer');
+  });
+}
+
+// Share to LINE
+if (elements.btnShareLineApp) {
+  elements.btnShareLineApp.addEventListener('click', () => {
+    const url = window.location.origin || 'https://pr-masker.vercel.app';
+    const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+    window.open(lineUrl, '_blank', 'noopener,noreferrer');
+  });
+}
+
+// Copy Site Link
+if (elements.btnCopyAppUrl) {
+  elements.btnCopyAppUrl.addEventListener('click', async () => {
+    const url = window.location.origin || 'https://pr-masker.vercel.app';
+    try {
+      await navigator.clipboard.writeText(url);
+      showToast('サイトURLをコピーしました！広報仲間にぜひシェアしてください 🎉', 'success');
+      closeShareModal();
+    } catch (err) {
+      showToast('URLのコピーに失敗しました', 'error');
     }
   });
 }
+
+// Close modals when clicking backdrop
+[elements.feedbackModal, elements.shareModal].forEach(modal => {
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
+});
 
 // ==========================================
 // Initialize App
