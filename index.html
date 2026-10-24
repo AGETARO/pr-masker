@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>かおモザ・PR MAKER - 顔ぼかし＆広報文100文字 AI自動生成サービス</title>
+  <meta name="description" content="写真をアップロードするだけで人物の顔を自動でモザイクやスタンプ・ぼかしで隠し、SNS・広報用の100文字PR文面を瞬時に自動生成するWebサービス。画像はクラウド上に一切残さない完全ローカル安心設計。">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Bokeh Background Decorations -->
+  <div class="bokeh-container" aria-hidden="true">
+    <div class="bokeh-orb orb-1"></div>
+    <div class="bokeh-orb orb-2"></div>
+    <div class="bokeh-orb orb-3"></div>
+    <div class="bokeh-orb orb-4"></div>
+    <div class="bokeh-orb orb-5"></div>
+    <div class="bokeh-sparkle sparkle-1"></div>
+    <div class="bokeh-sparkle sparkle-2"></div>
+    <div class="bokeh-sparkle sparkle-3"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="logo-icon">🐼</div>
+        <div>
+          <div class="logo-title">
+            <span>かおモザ・PR MAKER</span>
+            <span class="beta-badge">BETA</span>
+          </div>
+          <p class="logo-subtitle">瞬時に顔を匿名化 ＆ 広報文100字自動生成</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="privacy-pill" title="画像データはクラウド上に一切残しません。すべてブラウザ内で安全に完結します">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>クラウド保存ゼロ（完全ローカル安心設計）</span>
+        </div>
+        <button id="btnOpenFeedback" class="btn-ghost" title="試験運用へのフィードバック">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span>ご意見・評価</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Catchphrase (Matching Screenshot Style) -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1 class="hero-title">SNS投稿の「顔出しNG」を一瞬で解決。</h1>
+      <h2 class="hero-subtitle">AI自動モザイク＆広報文生成「かおモザ・PR MAKER」</h2>
+      <p class="hero-desc">
+        イベントやオフィスの写真をアップするだけで、AIが人物の顔を瞬時に検出してぼかし・モザイク・スタンプを自動合成。
+        さらに、SNSや社内報にすぐ使える約100文字の魅力的な広報文もワンクリックで作成します。
+      </p>
+
+      <!-- Quick sample loader buttons -->
+      <div class="sample-actions">
+        <span class="sample-label">💡 サンプル写真ですぐに試す：</span>
+        <button id="btnLoadSampleOffice" class="btn-sample">
+          🏢 オフィス会議（3名）
+        </button>
+        <button id="btnLoadSampleEvent" class="btn-sample">
+          🎉 ワークショップ・イベント
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prominent PR: Cloud-Free Security & Safety Declaration -->
+  <section class="pr-safety-section">
+    <div class="safety-card">
+      <div class="safety-header">
+        <div class="safety-icon-wrapper">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <span class="safety-tag">安心・安全 PR</span>
+          <h2 class="safety-title">クラウド上に画像データは一切残しません。</h2>
+        </div>
+      </div>
+      <p class="safety-main-text">
+        <strong>「かおモザ・PR MAKER」は、アップロードされた画像データをお手元の端末（ブラウザ）内でのみ処理します。</strong><br>
+        外部サーバーやクラウド上に写真が送信・保存・蓄積されることは一切ありません。<br>
+        企業秘密が写るオフィス写真、イベント参加者や大切なお子様のお顔も、情報流出の心配なく100%安全・安心してご利用いただけます。
+      </p>
+      <div class="safety-points-grid">
+        <div class="safety-point">
+          <div class="point-badge">1</div>
+          <div>
+            <strong>画像送信ゼロ（完全ブラウザ完結）</strong>
+            <p>最新のWebAssembly/AI技術により、すべての顔認識・モザイク加工がお使いの端末内で高速処理されます。</p>
+          </div>
+        </div>
+        <div class="safety-point">
+          <div class="point-badge">2</div>
+          <div>
+            <strong>データ蓄積・流出リスク皆無</strong>
+            <p>クラウド側に画像が保管されないため、第三者からの不正アクセスや流出の可能性が原理的にありません。</p>
+          </div>
+        </div>
+        <div class="safety-point">
+          <div class="point-badge">3</div>
+          <div>
+            <strong>企業コンプライアンス・学校広報にも適合</strong>
+            <p>個人情報保護法や社内規程、学校・自治体の情報セキュリティ基準を満たし、広報業務に安心導入できます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main App Workspace -->
+  <main class="main-container">
+    
+    <!-- Upload Dropzone (Visible when no image is loaded) -->
+    <section id="uploadSection" class="upload-section">
+      <div id="dropzone" class="dropzone-box">
+        <input type="file" id="fileInput" accept="image/*" class="file-input-hidden">
+        <div class="dropzone-visual">
+          <div class="upload-icon-pulse">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3>広報に使いたい写真をドラッグ＆ドロップ</h3>
+          <p class="dropzone-hint">または <span class="highlight-link">ファイルを選択</span> してください（クリップボードから Ctrl+V 貼り付けも可能）</p>
+          <div class="dropzone-meta">
+            <span>✓ JPG, PNG, WEBP 対応</span>
+            <span>✓ 最大20MBまで</span>
+            <span>🔒 画像はサーバー送信されず安全にローカル処理</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Editor Workspace (Visible after image is uploaded) -->
+    <section id="editorSection" class="editor-section hidden">
+      
+      <!-- Top Action Bar -->
+      <div class="editor-header-bar">
+        <div class="image-info-status">
+          <button id="btnNewImage" class="btn-secondary btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            別の写真に変更
+          </button>
+          <span id="detectionStatus" class="status-badge status-loading">
+            <span class="spinner-dot"></span>
+            AIが顔を検出中...
+          </span>
+        </div>
+
+        <div class="editor-quick-tools">
+          <button id="btnDownloadImage" class="btn-primary-blue btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            加工画像を保存 (JPEG)
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Workspace Card Wrapper with Cute Scalloped Badges -->
+      <div class="workspace-card-wrapper">
+        <!-- Cute Scalloped Badges around card (Matching Screenshot Tone) -->
+        <div class="scallop-badge badge-top-left" title="AIが自動で顔を認識">AI自動</div>
+        <div class="scallop-badge badge-top-right" title="サーバー通信なしでブラウザ完結">ブラウザ<br>完結</div>
+        <div class="scallop-badge badge-bottom-right" title="画像データはクラウドに残しません">安心<br>ローカル<br>処理</div>
+
+        <!-- Inside Card Header -->
+        <div class="card-brand-header">
+          <div class="brand-title-wrap">
+            <span class="brand-panda">🐼</span>
+            <span class="brand-name">かおモザ・PR MAKER</span>
+          </div>
+          <span class="brand-tagline">瞬時に顔を匿名化。安心をシェアしよう。</span>
+        </div>
+
+        <!-- Two Column Layout: Left Image Editor, Right PR Text Generator -->
+        <div class="editor-grid">
+          
+          <!-- Left: Image Canvas and Controls -->
+          <div class="editor-left-pane">
+            
+            <!-- Canvas Viewport with Overlays -->
+            <div id="canvasContainer" class="canvas-viewport">
+              <canvas id="mainCanvas"></canvas>
+              <!-- Interactive overlay layer for face bounding boxes & drag-to-add -->
+              <div id="interactiveOverlay" class="interactive-overlay"></div>
+              
+              <!-- Hint overlay -->
+              <div class="canvas-guide-overlay">
+                <span>💡 枠をクリックして変更・解除 / 画像上をドラッグして手動で追加</span>
+              </div>
+            </div>
+
+            <!-- Canvas Bottom Meta -->
+            <div class="canvas-bottom-bar">
+              <div class="legend-items">
+                <span class="legend-item"><span class="legend-dot green"></span>AI自動検出</span>
+                <span class="legend-item"><span class="legend-dot blue"></span>手動追加</span>
+              </div>
+              <button id="btnResetToAuto" class="btn-ghost-sm" title="自動検出時の状態にリセット">
+                ↺ 検出初期状態に戻す
+              </button>
+            </div>
+
+            <!-- Mask Mode Tabs -->
+            <div class="mask-mode-bar">
+              <div class="mask-tabs">
+                <button class="mask-tab active" data-mode="mosaic">
+                  <span class="tab-icon">🔲</span>
+                  <span>モザイク</span>
+                </button>
+                <button class="mask-tab" data-mode="stamp">
+                  <span class="tab-icon">🎨</span>
+                  <span>スタンプ</span>
+                </button>
+                <button class="mask-tab" data-mode="blur">
+                  <span class="tab-icon">💧</span>
+                  <span>ぼかし</span>
+                </button>
+              </div>
+
+              <div class="global-actions">
+                <button id="btnApplyAll" class="btn-outline-sm" title="検出されたすべての顔に一括適用">
+                  全顔一括適用
+                </button>
+                <button id="btnClearAll" class="btn-outline-sm" title="すべてのマスクを解除">
+                  すべて解除
+                </button>
+              </div>
+            </div>
+
+            <!-- Sub Controls (Dynamic per mode) -->
+            <div class="mask-options-panel">
+              <!-- Mosaic Options -->
+              <div id="mosaicOptions" class="mode-options active">
+                <div class="slider-control-row">
+                  <span class="slider-title">モザイク強度</span>
+                  <div class="slider-bar-wrap">
+                    <span class="slider-label-min">弱</span>
+                    <input type="range" id="mosaicSizeRange" min="6" max="40" value="16" step="2" class="cute-slider">
+                    <span class="slider-label-max">強</span>
+                  </div>
+                  <strong id="mosaicSizeVal" class="slider-val-tag">16px</strong>
+                </div>
+              </div>
+
+              <!-- Stamp Options -->
+              <div id="stampOptions" class="mode-options hidden">
+                <div class="stamp-selector-group">
+                  <span class="control-label">スタンプを選択:</span>
+                  <div class="stamp-palette">
+                    <button class="stamp-btn active" data-stamp="😊" title="スマイル">😊</button>
+                    <button class="stamp-btn" data-stamp="😎" title="サングラス">😎</button>
+                    <button class="stamp-btn" data-stamp="😉" title="ウィンク">😉</button>
+                    <button class="stamp-btn" data-stamp="🐱" title="ねこ">🐱</button>
+                    <button class="stamp-btn" data-stamp="🐶" title="いぬ">🐶</button>
+                    <button class="stamp-btn" data-stamp="🐼" title="パンダ">🐼</button>
+                    <button class="stamp-btn" data-stamp="🌸" title="さくら">🌸</button>
+                    <button class="stamp-btn" data-stamp="✨" title="きらきら">✨</button>
+                    <button class="stamp-btn" data-stamp="⭐" title="スター">⭐</button>
+                    <button class="stamp-btn" data-stamp="👤" title="ビジネス匿名">👤</button>
+                    <button class="stamp-btn" data-stamp="🕶️" title="目線隠し">🕶️</button>
+                    <button class="stamp-btn" data-stamp="💖" title="ハート">💖</button>
+                  </div>
+                </div>
+                <div class="slider-control-row mt-sm">
+                  <span class="slider-title">スタンプサイズ</span>
+                  <div class="slider-bar-wrap">
+                    <span class="slider-label-min">小</span>
+                    <input type="range" id="stampScaleRange" min="70" max="180" value="110" step="5" class="cute-slider">
+                    <span class="slider-label-max">大</span>
+                  </div>
+                  <strong id="stampScaleVal" class="slider-val-tag">110%</strong>
+                </div>
+              </div>
+
+              <!-- Blur Options -->
+              <div id="blurOptions" class="mode-options hidden">
+                <div class="slider-control-row">
+                  <span class="slider-title">ぼかし強度</span>
+                  <div class="slider-bar-wrap">
+                    <span class="slider-label-min">弱</span>
+                    <input type="range" id="blurRadiusRange" min="5" max="40" value="18" step="1" class="cute-slider">
+                    <span class="slider-label-max">強</span>
+                  </div>
+                  <strong id="blurRadiusVal" class="slider-val-tag">18px</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Face Mask Side Controls (Matching Screenshot Layout) -->
+            <div class="mask-action-panel">
+              <div class="face-count-pill-box">
+                <span class="face-count-pill">
+                  検出された顔: <strong id="faceCountNum">0</strong> 人
+                </span>
+              </div>
+
+              <div class="action-buttons-stack">
+                <button id="btnToggleCompare" class="btn-compare" title="押している間、元画像を表示します">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <span id="compareBtnText">長押しで比較 (Original)</span>
+                </button>
+
+                <button id="btnDownloadJpeg" class="btn-primary-blue btn-full">
+                  JPEGで保存
+                </button>
+
+                <button id="btnDownloadPng" class="btn-secondary-light btn-full">
+                  PNGで保存
+                </button>
+
+                <button id="btnOpenNewImageLink" class="btn-text-link">
+                  新しい画像を開く
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right: 100-character PR Text Generator -->
+          <div class="editor-right-pane">
+            <div class="pr-generator-card">
+              
+              <div class="card-header-with-badge">
+                <div>
+                  <h2 class="card-title">📝 広報用文面の自動生成</h2>
+                  <p class="card-desc">画像の内容に合わせた魅力的なSNS・広報文（約100文字）をAIが自動作成します</p>
+                </div>
+                <span class="target-chars-badge">目標: 約100文字</span>
+              </div>
+
+              <!-- Tone & Category Selectors -->
+              <div class="pr-settings-block">
+                <label class="control-label">投稿のトーン＆マナー：</label>
+                <div class="tone-chips">
+                  <button class="tone-chip active" data-tone="friendly">
+                    <span class="chip-icon">🌟</span>
+                    <span>親しみ・SNS向け</span>
+                  </button>
+                  <button class="tone-chip" data-tone="formal">
+                    <span class="chip-icon">🏢</span>
+                    <span>公式・社内報向け</span>
+                  </button>
+                  <button class="tone-chip" data-tone="event">
+                    <span class="chip-icon">🎉</span>
+                    <span>イベント・大盛況</span>
+                  </button>
+                  <button class="tone-chip" data-tone="recruit">
+                    <span class="chip-icon">💼</span>
+                    <span>採用・チーム紹介</span>
+                  </button>
+                </div>
+
+                <!-- Optional Custom Keyword -->
+                <div class="keyword-input-wrapper">
+                  <label for="customKeyword" class="control-label">含めたいキーワード（任意）：</label>
+                  <input type="text" id="customKeyword" placeholder="例：社内ハッカソン、新オフィス、新卒研修など" class="custom-input">
+                </div>
+
+                <!-- Generate Button -->
+                <button id="btnGeneratePRText" class="btn-generate-pr">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                  <span>広報文（100文字）を自動生成する</span>
+                </button>
+              </div>
+
+              <!-- Generated Output Area -->
+              <div class="pr-output-section">
+                <div class="output-header">
+                  <span class="control-label">生成結果（編集可能）：</span>
+                  
+                  <!-- Character Counter with Progress Gauge -->
+                  <div class="char-counter-container">
+                    <div class="char-gauge-bar">
+                      <div id="charGaugeFill" class="char-gauge-fill" style="width: 85%;"></div>
+                    </div>
+                    <span id="charCountLabel" class="char-count-label">
+                      <strong id="charCountNum">0</strong> 文字 <span class="char-target-hint">(最適: 85〜110文字)</span>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Textarea for PR text -->
+                <div class="pr-textarea-wrapper">
+                  <textarea id="prTextarea" rows="6" placeholder="上記の「広報文を自動生成する」ボタンを押すと、画像にぴったりの100文字程度の広報文が自動生成されます。手動で自由に修正も可能です。"></textarea>
+                  <div id="prLoadingOverlay" class="pr-loading-overlay hidden">
+                    <div class="ai-generating-pulse">
+                      <span class="spinner-circle"></span>
+                      <p id="generatingStatusText">AIが画像と情景を解析して100字文面を作成中...</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Buttons for Output -->
+                <div class="pr-output-actions">
+                  <div class="left-actions">
+                    <button id="btnCopyText" class="btn-secondary" title="クリップボードにコピー">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                      </svg>
+                      <span>文面をコピー</span>
+                    </button>
+                    <button id="btnRegenerateText" class="btn-ghost" title="別パターンを再生成">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                      </svg>
+                      <span>別パターン</span>
+                    </button>
+                  </div>
+
+                  <div class="right-actions">
+                    <button id="btnShareX" class="btn-x-share" title="文面をX (旧Twitter) で投稿">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      </svg>
+                      <span>𝕏 で共有</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- All-in-One Download Package -->
+                <div class="bundle-download-box">
+                  <div class="bundle-text">
+                    <strong>📦 ワンクリック一括利用</strong>
+                    <p>加工済み画像と広報文面をまとめてすぐ活用できます</p>
+                  </div>
+                  <button id="btnDownloadAll" class="btn-accent-blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span>画像保存 ＆ 文面コピー</span>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- How-To Guide: Manual Face Masking -->
+    <section class="howto-section">
+      <div class="howto-header">
+        <h2 class="section-title">📖 手動でぼかし・モザイクを入れる方法</h2>
+        <p class="section-desc">AIの自動検出で見つからなかった顔や、追加でぼかしたい箇所がある場合は、以下の手順で簡単に手動マスクを追加できます。</p>
+      </div>
+
+      <div class="howto-steps-grid">
+        <!-- Step 1 -->
+        <div class="howto-step-card">
+          <div class="step-number-badge">STEP 1</div>
+          <div class="step-icon-circle">📷</div>
+          <h3>画像をアップロード</h3>
+          <p>写真をドラッグ＆ドロップするか、「ファイルを選択」をクリック。クリップボード（Ctrl+V）からの貼り付けにも対応しています。</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="howto-step-card">
+          <div class="step-number-badge">STEP 2</div>
+          <div class="step-icon-circle">🎨</div>
+          <h3>隠し方を選択</h3>
+          <p>エディタのタブで <strong>「🔲 モザイク」「🎨 スタンプ」「💧 ぼかし」</strong> を選択。スライダーで粗さや強さを自由に調整できます。</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="howto-step-card">
+          <div class="step-number-badge">STEP 3</div>
+          <div class="step-icon-circle">✋</div>
+          <h3>画像上でドラッグ</h3>
+          <p>隠したい顔や名札・看板などの上を <strong>マウスでドラッグ</strong> して枠を描くだけ。離すと選択中のモードがぴったり適用されます。</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="howto-step-card">
+          <div class="step-number-badge">STEP 4</div>
+          <div class="step-icon-circle">🔄</div>
+          <h3>枠をクリックで切替・削除</h3>
+          <p>枠をクリックするとモード切替（モザイク → スタンプ → ぼかし → 解除）。右上の <strong>×ボタン</strong> で個別削除も可能です。</p>
+        </div>
+      </div>
+
+      <!-- Tips Box -->
+      <div class="howto-tips-box">
+        <div class="tips-icon">💡</div>
+        <div class="tips-content">
+          <strong>広報担当者のための便利ヒント：</strong>
+          <ul>
+            <li>名札・社名看板・機密書類など、<strong>顔以外のプライバシー情報</strong>もドラッグで手軽に隠せます。</li>
+            <li>AI検出済みの枠をクリックして「解除」にすれば、<strong>主役の1人だけ顔出しOK</strong>にできます。</li>
+            <li>「全顔一括適用」ボタンで、すべての顔枠に同じスタイルを一発反映できます。</li>
+            <li>画像データはクラウドに一切保存されないため、社内写真や未公開イベントの写真も安心です。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beta Explanation & Feature Guide -->
+    <section class="info-guide-section">
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-icon">🛡️</div>
+          <h3>完全クライアント処理の安心感</h3>
+          <p>
+            アップロードされた画像はサーバーに送信・保存されず、お使いのブラウザ内（WASM/Canvas）で顔検出とモザイク合成を完結。社内秘の写真やイベント写真も安全に保護されます。
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-icon">⚡</div>
+          <h3>100文字前後に最適化された広報文</h3>
+          <p>
+            X（旧Twitter）の投稿やInstagram、社内報にちょうどよい「約100文字（85〜110文字）」にジャストフィット。ハッシュタグも自動付与され、そのまま発信できます。
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-icon">🎯</div>
+          <h3>手動微調整＆スタンプ機能</h3>
+          <p>
+            AI自動顔検出に加えて、「特定の人だけスタンプ」「名札もドラッグでモザイク追加」など、広報担当者のリアルなニーズに応える直感操作に対応しています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">🐼 かおモザ・PR MAKER</span>
+        <span class="footer-tagline">広報用 顔プライバシー保護 ＆ 100文字PR文生成サービス（β試験運用版）</span>
+      </div>
+      <div class="footer-links">
+        <button id="btnFooterFeedback" class="footer-link-btn">ご意見・フィードバック</button>
+        <span class="footer-copy">&copy; 2026 かおモザ・PR MAKER Project. All rights reserved.</span>
+      </div>
+      <!-- Privacy Policy & Disclaimer Notice -->
+      <div class="footer-disclaimer-card" style="margin-top: 16px; padding: 14px 18px; background: rgba(255, 255, 255, 0.75); border: 1px solid #e2e8f0; border-radius: 12px; font-size: 12px; color: #64748b; line-height: 1.7; text-align: left; max-width: 760px; margin-left: auto; margin-right: auto; backdrop-filter: blur(8px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);">
+        <div style="font-weight: 700; color: #334155; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 12.5px;">
+          <span>🛡️ プライバシー保護および免責事項</span>
+        </div>
+        <ul style="margin: 0; padding-left: 18px; list-style-type: disc; display: flex; flex-direction: column; gap: 4px;">
+          <li><strong>プライバシー保護</strong>：アップロードされた画像データはすべてブラウザ上で処理され、サーバーに保存されることは一切ありません。</li>
+          <li><strong>免責事項</strong>：本ツールの利用により生じた損害等について開発者は責任を負いません。加工後の画像や生成された広報文面の最終確認は、利用者の責任において行ってください。</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: Feedback (Beta Testing) -->
+  <div id="feedbackModal" class="modal-backdrop hidden">
+    <div class="modal-box glass-modal">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <h3>試験運用アンケート・フィードバック</h3>
+        </div>
+        <button id="btnCloseFeedback" class="btn-close-modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-desc">
+          本サービスは現在<strong>「試験運用中（ベータ版）」</strong>です。より使いやすい広報支援ツールに改善するため、率直なご意見・ご要望をお寄せください！
+        </p>
+
+        <div class="form-group">
+          <label class="form-label">全体の使いやすさ・満足度：</label>
+          <div class="star-rating">
+            <button class="star-btn" data-val="1">★</button>
+            <button class="star-btn" data-val="2">★</button>
+            <button class="star-btn" data-val="3">★</button>
+            <button class="star-btn active" data-val="4">★</button>
+            <button class="star-btn active" data-val="5">★</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="feedbackRole" class="form-label">あなたのご用途・立場：</label>
+          <select id="feedbackRole" class="custom-input">
+            <option value="corporate_pr">企業・法人の広報・SNS担当</option>
+            <option value="school_gov">学校・自治体・地域コミュニティ</option>
+            <option value="event_organizer">イベント主催・セミナー運営</option>
+            <option value="individual">個人クリエイター・インフルエンサー</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="feedbackText" class="form-label">ご意見・追加してほしい機能など：</label>
+          <textarea id="feedbackText" rows="4" class="custom-input" placeholder="例: 「社名ロゴをスタンプに追加したい」「もう少し短い80字版もほしい」「顔検出の精度が良くて助かった」など"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btnCloseFeedback2" class="btn-ghost">閉じる</button>
+        <button id="btnSubmitFeedback" class="btn-primary-blue">フィードバックを送信</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- MediaPipe Tasks Vision CDN & App Script -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
